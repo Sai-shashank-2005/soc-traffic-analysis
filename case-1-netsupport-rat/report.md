@@ -64,8 +64,9 @@ Filter used:
 ip.addr == 45.131.214.85
 ```
 
-Evidence:
-[IoC Pivot](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-1-netsupport-rat/screenshots/ioc-pivot.png)
+[View Full Image](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-1-netsupport-rat/screenshots/ioc-pivot.png)
+
+![IoC Pivot](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-1-netsupport-rat/screenshots/ioc-pivot.png)
 
 * Identified internal host communicating with malicious IP
 * Confirmed infected system: **10.2.28.88**
@@ -87,15 +88,16 @@ ip.src == 10.2.28.88 and ip.dst == 45.131.214.85
 
 ### 6.3 Network Behavior Analysis (C2 Activity)
 
-Evidence:
-[C2 Traffic](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-1-netsupport-rat/screenshots/c2-traffic.png)
+[View Full Image](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-1-netsupport-rat/screenshots/c2-traffic.png)
+
+![C2 Traffic](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-1-netsupport-rat/screenshots/c2-traffic.png)
 
 * Repeated outbound connections observed:
 
   ```
   10.2.28.88 → 45.131.214.85:443
   ```
-* Repeated HTTPS traffic suggests **beaconing behavior**
+* Repeated HTTPS traffic indicates **beaconing behavior**
 * Activity consistent with RAT-based command-and-control communication
 
 ---
@@ -108,8 +110,9 @@ Filter used:
 nbns
 ```
 
-Evidence:
-[Hostname Identification](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-1-netsupport-rat/screenshots/hostname-nbns.png)
+[View Full Image](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-1-netsupport-rat/screenshots/hostname-nbns.png)
+
+![Hostname Identification](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-1-netsupport-rat/screenshots/hostname-nbns.png)
 
 * Hostname extracted from NBNS registration traffic
 
@@ -123,8 +126,9 @@ Filter used:
 kerberos.CNameString
 ```
 
-Evidence:
-[Username Extraction](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-1-netsupport-rat/screenshots/username-kerberos.png)
+[View Full Image](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-1-netsupport-rat/screenshots/username-kerberos.png)
+
+![Username Extraction](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-1-netsupport-rat/screenshots/username-kerberos.png)
 
 * Username identified from Kerberos authentication traffic
 

@@ -1,5 +1,6 @@
 # 🛡️ Security Incident Report
 
+**Case ID:** SOC-TRAFFIC-001
 **Incident Type:** Malware Infection (NetSupport Manager RAT)
 **Date of Analysis:** 2026-02-28
 **Analyst:** Sai Shashank P
@@ -10,15 +11,15 @@
 
 A SIEM alert identified suspicious outbound traffic associated with **NetSupport Manager RAT** communicating with a known malicious IP address (**45.131.214.85**) over TCP port 443.
 
-Packet capture (PCAP) analysis confirmed that an internal host was compromised and engaged in repeated encrypted communication consistent with command-and-control (C2) activity. The affected system and associated user were successfully identified.
+PCAP analysis confirmed that an internal host was compromised and engaged in repeated encrypted outbound communication consistent with command-and-control (C2) activity. The affected system and associated user account were identified.
 
 ---
 
 ## 2. Scope of Investigation
 
-* Data Source: Network packet capture (PCAP)
-* Network Range: 10.2.28.0/24
-* Domain Environment: EASYAS123
+* **Data Source:** Network packet capture (PCAP)
+* **Network Range:** 10.2.28.0/24
+* **Domain Environment:** EASYAS123
 
 ---
 
@@ -45,82 +46,98 @@ Packet capture (PCAP) analysis confirmed that an internal host was compromised a
 
 ## 5. User Attribution
 
-| Attribute | Value      |
-| --------- | ---------- |
-| Username  | brolf      |
-| Full Name | Becka Rolf |
-| Domain    | EASYAS123  |
+| Attribute | Value                        |
+| --------- | ---------------------------- |
+| Username  | brolf                        |
+| Domain    | EASYAS123                    |
+| Full Name | Not observed in PCAP traffic |
 
 ---
 
-## 6. Investigation Methodology
+## 6. Investigation & Analysis
 
 ### 6.1 IoC-Based Traffic Pivot
 
-Filter applied:
+Filter used:
 
 ```
 ip.addr == 45.131.214.85
 ```
 
-📸 Evidence:
-![IoC Pivot](./screenshots/ioc-pivot.png)
+Evidence:
+[IoC Pivot](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-1-netsupport-rat/screenshots/ioc-pivot.png)
 
-* Identified internal host (10.2.28.88) communicating with malicious IP.
+* Identified internal host communicating with malicious IP
+* Confirmed infected system: **10.2.28.88**
 
 ---
 
-### 6.2 Traffic Behavior Analysis
+### 6.2 Directional Traffic Analysis
 
-📸 Evidence:
-![C2 Traffic](./screenshots/c2-traffic.png)
+Filter used:
 
-* Repeated outbound connections:
+```
+ip.src == 10.2.28.88 and ip.dst == 45.131.214.85
+```
+
+* Confirmed outbound communication initiated from infected host
+* Established clear attacker-victim relationship
+
+---
+
+### 6.3 Network Behavior Analysis (C2 Activity)
+
+Evidence:
+[C2 Traffic](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-1-netsupport-rat/screenshots/c2-traffic.png)
+
+* Repeated outbound connections observed:
 
   ```
   10.2.28.88 → 45.131.214.85:443
   ```
-* Behavior consistent with encrypted C2 communication.
+* Repeated HTTPS traffic suggests **beaconing behavior**
+* Activity consistent with RAT-based command-and-control communication
 
 ---
 
-### 6.3 Host Identification (NBNS Analysis)
+### 6.4 Host Identification (NBNS Analysis)
 
-Filter applied:
+Filter used:
 
 ```
 nbns
 ```
 
-📸 Evidence:
-![Hostname NBNS](./screenshots/hostname-nbns.png)
+Evidence:
+[Hostname Identification](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-1-netsupport-rat/screenshots/hostname-nbns.png)
 
-* Extracted hostname from NBNS registration traffic.
+* Hostname extracted from NBNS registration traffic
 
 ---
 
-### 6.4 User Identification (Kerberos Analysis)
+### 6.5 User Identification (Kerberos Analysis)
 
-Filter applied:
+Filter used:
 
 ```
 kerberos.CNameString
 ```
 
-📸 Evidence:
-![Username Kerberos](./screenshots/username-kerberos.png)
+Evidence:
+[Username Extraction](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-1-netsupport-rat/screenshots/username-kerberos.png)
 
-* Extracted username from Kerberos authentication traffic.
+* Username identified from Kerberos authentication traffic
 
 ---
 
 ## 7. Findings
 
-* Host **10.2.28.88 (DESKTOP-TEYQ2NR)** is compromised
+* Host **10.2.28.88 (DESKTOP-TEYQ2NR)** is confirmed compromised
 * System communicates with known malicious infrastructure
 * Communication occurs over encrypted channel (TCP 443)
-* Pattern indicates persistent command-and-control activity
-* User **brolf (Becka Rolf)** associated with compromised system
+* Repeated outbound HTTPS connections indicate **beaconing behavior**
+* Behavior aligns with **NetSupport RAT command-and-control activity**
+* User account **brolf** associated with infected system
 
 ---
 
@@ -136,16 +153,16 @@ kerberos.CNameString
 
 ## 9. Recommendations
 
-* Immediately isolate affected host from network
-* Block malicious IP (45.131.214.85) at perimeter controls
+* Isolate affected host immediately
+* Block malicious IP (45.131.214.85) at network perimeter
 * Reset credentials for affected user account
-* Perform endpoint malware removal and forensic analysis
-* Review logs for lateral movement or additional compromise
+* Perform endpoint malware removal
+* Conduct further investigation for lateral movement
 
 ---
 
 ## 10. Conclusion
 
-The investigation confirms that the system **DESKTOP-TEYQ2NR** is infected with NetSupport RAT and actively communicating with an external attacker-controlled server. Immediate containment and remediation actions are required to prevent further impact.
+The investigation confirms that the system **DESKTOP-TEYQ2NR** is infected with NetSupport RAT and actively communicating with an external attacker-controlled server. Immediate containment and remediation actions are required to prevent further compromise.
 
 ---

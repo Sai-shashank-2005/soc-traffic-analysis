@@ -1,7 +1,7 @@
 # 🛡️ Security Incident Report
 
 **Case ID:** SOC-TRAFFIC-002
-**Incident Type:** Malware Infection (Trickbot)
+**Incident Type:** Malware Infection (TrickBot)
 **Date of Analysis:** 2026-04-09
 **Analyst:** Sai Shashank P
 
@@ -9,15 +9,13 @@
 
 ## 1. Executive Summary
 
-A network traffic investigation identified a malware infection on an internal Windows host following the download of a malicious binary from an external domain. Analysis confirmed that the payload was a **Trickbot banking trojan**, delivered over HTTP as a disguised binary file.
-
-Post-infection activity included external IP reconnaissance and encrypted outbound communication to suspicious infrastructure over non-standard ports, consistent with command-and-control (C2) behavior.
+On 2018-04-11 at approximately 10:04:09 UTC, a Windows computer used by the machine account BATISTE-PC$ was infected with TrickBot malware. This infection probably originated from a drive-by download involving the domain caveaudelteatro.it, which delivered a malicious binary file (ser0410.bin). The infected computer was isolated from the network, malicious IP addresses were blocked, and remediation actions including malware removal and credential resets were initiated.
 
 ---
 
 ## 2. Scope of Investigation
 
-* **Data Source:** Network Packet Capture (PCAP)
+* **Data Source:** Network packet capture (PCAP)
 * **Network Range:** 10.10.10.0/24
 * **Domain Environment:** dynaccountic.com
 
@@ -28,12 +26,11 @@ Post-infection activity included external IP reconnaissance and encrypted outbou
 | Type             | Value              |
 | ---------------- | ------------------ |
 | Malicious Domain | caveaudelteatro.it |
-| Malicious IP     | 95.110.193.132     |
+| Delivery IP      | 95.110.193.132     |
 | C2 IP            | 82.214.141.134     |
-| C2 IP            | 86.61.160.50       |
-| Protocols        | HTTP, TLS          |
-| Ports            | 80, 447, 449       |
-| Malware          | Trickbot           |
+| Protocol         | HTTP, TLS          |
+| Ports            | 80, 449            |
+| Malware          | TrickBot           |
 
 ---
 
@@ -49,32 +46,19 @@ Post-infection activity included external IP reconnaissance and encrypted outbou
 
 ## 5. User Attribution
 
-| Attribute | Value            |
-| --------- | ---------------- |
-| Username  | winford.batiste  |
-| Domain    | dynaccountic.com |
-| Source    | Kerberos Traffic |
+| Attribute | Value                                 |
+| --------- | ------------------------------------- |
+| Username  | Not observed in PCAP                  |
+| Domain    | dynaccountic.com                      |
+| Notes     | Machine account observed: BATISTE-PC$ |
 
 ---
 
 ## 6. Investigation & Analysis
 
-### 6.1 IoC-Based Traffic Pivot
-
-Filter used:
-
-```
-ip.addr == 95.110.193.132
-```
-
-![IoC Pivot](./screenshots/01-infection-vector.png)
-
-* Identified internal host communicating with external malicious infrastructure
-* Confirmed infected system: **10.10.10.209**
-
 ---
 
-### 6.2 Payload Delivery Analysis
+### 6.1 Payload Delivery (Initial Infection)
 
 Filter used:
 
@@ -82,94 +66,101 @@ Filter used:
 http.request
 ```
 
-![Payload Download](./screenshots/02-payload-download.png)
-
-* Suspicious HTTP request observed:
+* Identified malicious HTTP request:
 
 ```
-GET /ser0410.bin HTTP/1.1
-Host: caveaudelteatro.it
+GET /ser0410.bin
 ```
 
-* Server response:
+[View Screenshot](https://github.com/<your-repo>/case-2-dynaccountic/screenshots/payload-download.png)
 
-  * `HTTP/1.1 200 OK`
-  * File size: **364,544 bytes**
-  * Content-Type: application/octet-stream
+![Payload Download](https://raw.githubusercontent.com/<your-repo>/case-2-dynaccountic/screenshots/payload-download.png)
 
-* Traffic pattern:
+* Source: 10.10.10.209
+* Destination: 95.110.193.132
+* Host: caveaudelteatro.it
 
-  * Large server-to-client packets (~1460 bytes)
-  * Continuous transfer indicates file download
+👉 Confirms **initial malware delivery**
 
 ---
 
-### 6.3 Malware Validation
+### 6.2 Malware Extraction (HTTP Objects)
 
-![MZ Header](./screenshots/03-mz-header.png)
+* Extracted file from HTTP traffic:
 
-* Extracted file (`ser0410.bin`) analysis:
+```
+ser0410.bin (~364 KB)
+```
 
-  * Presence of **MZ header (4D 5A)**
-  * Confirms Windows PE executable
+[View Screenshot](https://github.com/<your-repo>/case-2-dynaccountic/screenshots/http-object.png)
 
-* Hash analysis:
+![HTTP Object](https://raw.githubusercontent.com/<your-repo>/case-2-dynaccountic/screenshots/http-object.png)
 
-  * SHA256: `c2c1e2c22f67dda6553cbcc173694b68677b77319243684925e8dc3f78b3dbf8`
-  * Matches known **Trickbot malware**
+👉 Confirms **binary payload transfer**
 
 ---
 
-### 6.4 Post-Infection Behavior
+### 6.3 Malware Verification (VirusTotal)
+
+* File analyzed in VirusTotal
+* Detected as **TrickBot malware**
+
+[View Screenshot](https://github.com/<your-repo>/case-2-dynaccountic/screenshots/virustotal.png)
+
+![VirusTotal](https://raw.githubusercontent.com/<your-repo>/case-2-dynaccountic/screenshots/virustotal.png)
+
+👉 Confirms **malicious nature of payload**
+
+---
+
+### 6.4 DNS Resolution Analysis
 
 Filter used:
 
 ```
-http.request
+dns
 ```
 
-![IP Recon](./screenshots/04-ip-recon.png)
-
-* Observed request:
+* Domain resolved:
 
 ```
-GET /raw HTTP/1.1
-Host: myexternalip.com
+caveaudelteatro.it → 95.110.193.132
 ```
 
-* Indicates external IP lookup performed by malware
-* Common reconnaissance behavior post-infection
+[View Screenshot](https://github.com/<your-repo>/case-2-dynaccountic/screenshots/dns-resolution.png)
+
+![DNS Resolution](https://raw.githubusercontent.com/<your-repo>/case-2-dynaccountic/screenshots/dns-resolution.png)
+
+👉 Links **domain to delivery infrastructure**
 
 ---
 
-### 6.5 Command-and-Control (C2) Activity
+### 6.5 Command-and-Control (C2) Communication
 
 Filter used:
 
 ```
-ip.addr == 10.10.10.209 && (tcp.port == 447 || tcp.port == 449)
+ip.addr == 82.214.141.134
 ```
 
-![C2 Traffic](./screenshots/05-c2-traffic.png)
-
-* Encrypted outbound communication observed:
+* Observed repeated encrypted communication:
 
 ```
 10.10.10.209 → 82.214.141.134:449
-10.10.10.209 → 86.61.160.50:447
 ```
 
-* Characteristics:
+[View Screenshot](https://github.com/<your-repo>/case-2-dynaccountic/screenshots/c2-traffic.png)
 
-  * TLS encrypted traffic
-  * Non-standard ports
-  * Repeated outbound connections
+![C2 Traffic](https://raw.githubusercontent.com/<your-repo>/case-2-dynaccountic/screenshots/c2-traffic.png)
 
-* Behavior consistent with **Trickbot C2 communication**
+* TLS handshake + encrypted data observed
+* Repeated connections over time
+
+👉 Indicates **C2 beaconing behavior**
 
 ---
 
-### 6.6 Host Identification (NBNS Analysis)
+### 6.6 Host Identification
 
 Filter used:
 
@@ -177,61 +168,58 @@ Filter used:
 nbns
 ```
 
-![Hostname](./screenshots/06-hostname.png)
+[View Screenshot](https://github.com/<your-repo>/case-2-dynaccountic/screenshots/hostname.png)
 
-* Hostname identified: **BATISTE-PC**
+![Hostname](https://raw.githubusercontent.com/<your-repo>/case-2-dynaccountic/screenshots/hostname.png)
 
----
-
-### 6.7 User Identification (Kerberos Analysis)
-
-Filter used:
+* Hostname identified as:
 
 ```
-kerberos.CNameString and !(kerberos.CNameString contains "$")
+BATISTE-PC
 ```
-
-![Username](./screenshots/07-username.png)
-
-* User identified: **winford.batiste**
 
 ---
 
 ## 7. Findings
 
 * Host **10.10.10.209 (BATISTE-PC)** is confirmed compromised
-* Malware identified as **Trickbot banking trojan**
-* Infection initiated via malicious HTTP download
-* Payload delivered as disguised executable (`.bin`)
-* Post-infection reconnaissance observed
-* Encrypted outbound communication confirms active C2
-* User **winford.batiste** associated with infected system
+* Malware delivered via HTTP from **caveaudelteatro.it**
+* Payload identified as **TrickBot banking trojan**
+* Infection likely occurred via **drive-by download**
+* Post-infection behavior shows transition to encrypted TLS communication
+* Repeated communication with **82.214.141.134:449** indicates C2 activity
+* Additional outbound connections suggest possible scanning/propagation
 
 ---
 
 ## 8. Risk Assessment
 
-| Category   | Assessment                                          |
-| ---------- | --------------------------------------------------- |
-| Severity   | Critical                                            |
-| Impact     | Credential theft, financial fraud, lateral movement |
-| Likelihood | Confirmed active compromise                         |
+| Category   | Assessment                                    |
+| ---------- | --------------------------------------------- |
+| Severity   | High                                          |
+| Impact     | System compromise, potential credential theft |
+| Likelihood | Confirmed active infection                    |
 
 ---
 
 ## 9. Recommendations
 
 * Isolate affected host immediately
-* Block malicious IPs and domains at network perimeter
-* Reset credentials for affected user
-* Perform full endpoint remediation
-* Monitor for lateral movement and persistence mechanisms
-* Deploy SIEM detection rules for similar activity
+* Block malicious IPs:
+
+  * 95.110.193.132
+  * 82.214.141.134
+* Perform endpoint malware removal
+* Reset credentials associated with the host
+* Monitor for additional infected systems
+* Deploy detection rules for:
+
+  * Binary downloads followed by TLS on non-standard ports
 
 ---
 
 ## 10. Conclusion
 
-The investigation confirms that the system **BATISTE-PC** was infected with Trickbot malware following a malicious payload download from an external domain. The host exhibited post-infection reconnaissance and active encrypted communication with attacker-controlled infrastructure, indicating an ongoing compromise requiring immediate containment and remediation.
+The investigation confirms that the system BATISTE-PC was infected with TrickBot malware via a malicious binary download. Post-infection activity shows encrypted communication with external infrastructure over a non-standard port, consistent with command-and-control behavior. Immediate containment and remediation actions are required.
 
 ---

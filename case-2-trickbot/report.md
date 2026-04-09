@@ -29,7 +29,7 @@ On 2018-04-11 at approximately 10:04:09 UTC, a Windows computer used by the mach
 | Delivery IP      | 95.110.193.132     |
 | C2 IP            | 82.214.141.134     |
 | Protocol         | HTTP, TLS          |
-| Ports            | 80, 449            |
+| Ports            | 447, 449           |
 | Malware          | TrickBot           |
 
 ---
@@ -72,9 +72,9 @@ http.request
 GET /ser0410.bin
 ```
 
-[View Screenshot](https://github.com/<your-repo>/case-2-dynaccountic/screenshots/payload-download.png)
+[View Screenshot](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-2-trickbot/screenshots/payload-download.png)
 
-![Payload Download](https://raw.githubusercontent.com/<your-repo>/case-2-dynaccountic/screenshots/payload-download.png)
+![Payload Download](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-2-trickbot/screenshots/payload-download.png)
 
 * Source: 10.10.10.209
 * Destination: 95.110.193.132
@@ -92,9 +92,9 @@ GET /ser0410.bin
 ser0410.bin (~364 KB)
 ```
 
-[View Screenshot](https://github.com/<your-repo>/case-2-dynaccountic/screenshots/http-object.png)
+[View Screenshot](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-2-trickbot/screenshots/http-object.png)
 
-![HTTP Object](https://raw.githubusercontent.com/<your-repo>/case-2-dynaccountic/screenshots/http-object.png)
+![HTTP Object](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-2-trickbot/screenshots/http-object.png)
 
 👉 Confirms **binary payload transfer**
 
@@ -105,9 +105,9 @@ ser0410.bin (~364 KB)
 * File analyzed in VirusTotal
 * Detected as **TrickBot malware**
 
-[View Screenshot](https://github.com/<your-repo>/case-2-dynaccountic/screenshots/virustotal.png)
+[View Screenshot](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-2-trickbot/screenshots/virustotal.png)
 
-![VirusTotal](https://raw.githubusercontent.com/<your-repo>/case-2-dynaccountic/screenshots/virustotal.png)
+![VirusTotal](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-2-trickbot/screenshots/virustotal.png)
 
 👉 Confirms **malicious nature of payload**
 
@@ -127,9 +127,9 @@ dns
 caveaudelteatro.it → 95.110.193.132
 ```
 
-[View Screenshot](https://github.com/<your-repo>/case-2-dynaccountic/screenshots/dns-resolution.png)
+[View Screenshot](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-2-trickbot/screenshots/dns-resolution.png)
 
-![DNS Resolution](https://raw.githubusercontent.com/<your-repo>/case-2-dynaccountic/screenshots/dns-resolution.png)
+![DNS Resolution](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-2-trickbot/screenshots/dns-resolution.png)
 
 👉 Links **domain to delivery infrastructure**
 
@@ -149,11 +149,11 @@ ip.addr == 82.214.141.134
 10.10.10.209 → 82.214.141.134:449
 ```
 
-[View Screenshot](https://github.com/<your-repo>/case-2-dynaccountic/screenshots/c2-traffic.png)
+[View Screenshot](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-2-trickbot/screenshots/c2-traffic.png)
 
-![C2 Traffic](https://raw.githubusercontent.com/<your-repo>/case-2-dynaccountic/screenshots/c2-traffic.png)
+![C2 Traffic](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-2-trickbot/screenshots/c2-traffic.png)
 
-* TLS handshake + encrypted data observed
+* TLS handshake + encrypted data observed after the incident 
 * Repeated connections over time
 
 👉 Indicates **C2 beaconing behavior**
@@ -168,9 +168,9 @@ Filter used:
 nbns
 ```
 
-[View Screenshot](https://github.com/<your-repo>/case-2-dynaccountic/screenshots/hostname.png)
+[View Screenshot](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-2-trickbot/screenshots/hostname.png)
 
-![Hostname](https://raw.githubusercontent.com/<your-repo>/case-2-dynaccountic/screenshots/hostname.png)
+![Hostname](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-2-trickbot/screenshots/hostname.png)
 
 * Hostname identified as:
 

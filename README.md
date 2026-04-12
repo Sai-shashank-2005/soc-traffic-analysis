@@ -1,30 +1,45 @@
-# 🛡️ SOC Traffic Analysis Lab
+# SOC Traffic Analysis Lab
 
 ## Overview
 
-This repository showcases end-to-end network traffic investigations performed in a SOC-style workflow. Each case study demonstrates the ability to analyze packet captures (PCAP), identify malicious activity, reconstruct attack chains, and produce professional incident reports aligned with real-world SOC operations.
+This repository documents multiple real-world network traffic investigations conducted using a SOC-style workflow. Each case simulates analyst-driven incident response, focusing on identifying malicious activity, reconstructing attack chains, and producing evidence-backed security reports.
+
+The work reflects practical experience in analyzing PCAP data, validating threats, and performing attribution of compromised systems and users.
 
 ---
 
-## Objectives
+## Key Capabilities
 
-* Perform structured traffic analysis using Wireshark
-* Identify malware delivery mechanisms and infection points
-* Detect command-and-control (C2) communications
-* Differentiate normal vs malicious network behavior
-* Reconstruct full attack timelines
-* Document findings in a professional incident report format
+* Detection of malware activity through network traffic analysis
+* Reconstruction of attack chains from initial access to command-and-control
+* Identification of infected hosts and user attribution
+* Differentiation between benign and malicious network behavior
+* Analysis of real-world malware families (NetSupport RAT, TrickBot, Lumma Stealer)
+* Development of structured, evidence-based incident reports
 
 ---
 
-## Core Competencies Demonstrated
+## Case Highlights
 
-* Network protocol analysis (DNS, HTTP, TLS, TCP)
-* Threat hunting and investigative pivoting
-* Malware delivery and execution analysis
-* Behavioral detection (beyond static IoCs)
-* Incident triage and validation
-* SOC reporting and communication
+| Case   | Malware        | Key Outcome                                                                    |
+| ------ | -------------- | ------------------------------------------------------------------------------ |
+| Case 1 | NetSupport RAT | Identified remote access activity and beaconing behavior                       |
+| Case 2 | TrickBot       | Reconstructed full infection chain and C2 communication over non-standard port |
+| Case 3 | Lumma Stealer  | Detected victim fingerprinting and performed full host/user attribution        |
+
+---
+
+## Investigation Approach
+
+Each case follows a consistent SOC investigation methodology:
+
+1. Alert or anomaly identification
+2. Traffic scoping and filtering
+3. Indicator pivoting (IP, domain, file artifacts)
+4. Behavioral analysis and pattern recognition
+5. Attack chain reconstruction
+6. Asset and user attribution
+7. Impact assessment and response recommendations
 
 ---
 
@@ -33,77 +48,53 @@ This repository showcases end-to-end network traffic investigations performed in
 ```
 soc-traffic-analysis/
 ├── case-1-netsupport-rat/
-│   ├── screenshots/
-│   └── report.md
-├── case-2-dynaccountic/
+├── case-2-trickbot/
+├── case-3-lumma-fingerprinting/
 │   ├── screenshots/
 │   └── report.md
 ```
 
----
+Each case contains:
 
-## Case Studies
-
-### Case 1: NetSupport RAT Infection
-
-* Identified compromised host via IoC-based pivoting
-* Confirmed outbound encrypted communication to known malicious infrastructure
-* Observed repeated HTTPS traffic consistent with beaconing behavior
-* Extracted host and user attribution from network telemetry
+* A detailed incident report
+* Supporting packet-level evidence (screenshots)
+* Documented analysis aligned with SOC workflows
 
 ---
 
-### Case 2: TrickBot Malware Infection (Dynaccountic)
+## Tools & Techniques
 
-* Identified initial infection via HTTP binary download (`ser0410.bin`)
-* Validated malware using external threat intelligence (VirusTotal)
-* Reconstructed attack chain: DNS → Payload Delivery → Execution → C2
-* Detected encrypted communication over non-standard port (449)
-* Distinguished delivery infrastructure from command-and-control behavior
-
----
-
-## SOC Workflow Applied
-
-1. Alert / anomaly identification
-2. Data scoping and traffic filtering
-3. Indicator pivoting (IP, domain, file)
-4. Behavioral analysis and pattern recognition
-5. Attack chain reconstruction
-6. Asset identification and impact assessment
-7. Containment and remediation recommendations
+* Wireshark for packet-level analysis
+* Threat intelligence validation (VirusTotal)
+* Protocol analysis (DNS, HTTP, TLS, TCP)
+* Behavioral detection and traffic pattern analysis
 
 ---
 
-## Tools & Environment
+## Key Observations
 
-* Wireshark (packet analysis)
-* VirusTotal (malware verification)
-* GitHub (documentation and case reporting)
-
----
-
-## Key Insights
-
-* Effective detection relies on behavior, not just indicators
-* Malware frequently uses encrypted channels (TLS) to evade inspection
-* Timeline correlation is critical for understanding attack progression
-* Not all traffic is suspicious — accurate filtering is essential in SOC environments
+* Malware frequently leverages legitimate protocols (HTTP/TLS) to evade detection
+* Behavioral analysis is more reliable than static indicators alone
+* Accurate timeline reconstruction is critical for understanding attack progression
+* Effective filtering is essential to separate benign traffic from malicious activity
 
 ---
 
-## Professional Focus
+## Professional Context
 
-This repository is designed to reflect practical SOC analyst capabilities, including:
+This work demonstrates practical SOC analyst capabilities, including:
 
-* Real-world investigation methodology
-* Clear and defensible reasoning
-* Evidence-backed conclusions
-* Actionable security recommendations
+* Structured investigation methodology
+* Evidence-based reasoning and validation
+* Clear and concise incident reporting
+* Focus on real-world detection and analysis scenarios
 
 ---
 
 ## Author
 
 Sai Shashank P
-Aspiring SOC Analyst | Focused on Threat Detection, Incident Response, and Network Security Analysis
+SOC Analyst 
+Focused on Threat Detection, Incident Response, and Network Traffic Analysis
+
+---

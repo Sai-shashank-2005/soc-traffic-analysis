@@ -2,44 +2,66 @@
 
 ## Overview
 
-This repository documents multiple real-world network traffic investigations conducted using a SOC-style workflow. Each case simulates analyst-driven incident response, focusing on identifying malicious activity, reconstructing attack chains, and producing evidence-backed security reports.
+This repository documents hands-on Security Operations Center (SOC) investigations performed using both **SIEM (Splunk)** and **network traffic analysis (Wireshark)**.
 
-The work reflects practical experience in analyzing PCAP data, validating threats, and performing attribution of compromised systems and users.
+The lab simulates real-world detection and incident response workflows, focusing on identifying malicious activity, validating threats, and producing professional, evidence-based security reports.
+
+---
+
+## Core Focus Areas
+
+* SIEM-based threat detection (Splunk)
+* Network traffic analysis (PCAP investigations)
+* Attack simulation and detection engineering
+* Log analysis (Windows, Sysmon, Firewall)
+* Incident response and reporting
 
 ---
 
 ## Key Capabilities
 
-* Detection of malware activity through network traffic analysis
-* Reconstruction of attack chains from initial access to command-and-control
-* Identification of infected hosts and user attribution
-* Differentiation between benign and malicious network behavior
-* Analysis of real-world malware families (NetSupport RAT, TrickBot, Lumma Stealer)
-* Development of structured, evidence-based incident reports
+* Detection of reconnaissance activities (port scanning, enumeration)
+* Identification of malware behavior through network traffic
+* Correlation of logs across multiple data sources
+* Reconstruction of attack chains from initial access to impact
+* Differentiation between benign and malicious activity
+* Development of structured SOC incident reports
 
 ---
 
-## Case Highlights
+## Case Categories
 
-| Case   | Malware        | Key Outcome                                                                    |
-| ------ | -------------- | ------------------------------------------------------------------------------ |
-| Case 1 | NetSupport RAT | Identified remote access activity and beaconing behavior                       |
-| Case 2 | TrickBot       | Reconstructed full infection chain and C2 communication over non-standard port |
-| Case 3 | Lumma Stealer  | Detected victim fingerprinting and performed full host/user attribution        |
+### 🔹 SIEM Detection (Splunk)
+
+| Case   | Title                              | Description                                                          |
+| ------ | ---------------------------------- | -------------------------------------------------------------------- |
+| Case 1 | Port Scan Detection                | Detected reconnaissance activity using firewall logs and SPL queries |
+| Case 2 | Brute Force Detection *(Upcoming)* | Detect authentication attacks using Windows/Sysmon logs              |
 
 ---
 
-## Investigation Approach
+### 🔹 Network Traffic Analysis (Wireshark)
 
-Each case follows a consistent SOC investigation methodology:
+| Case   | Malware        | Key Outcome                                              |
+| ------ | -------------- | -------------------------------------------------------- |
+| Case 3 | NetSupport RAT | Identified remote access activity and beaconing behavior |
+| Case 4 | TrickBot       | Reconstructed infection chain and C2 communication       |
+| Case 5 | Lumma Stealer  | Detected victim fingerprinting and attribution           |
 
-1. Alert or anomaly identification
-2. Traffic scoping and filtering
-3. Indicator pivoting (IP, domain, file artifacts)
-4. Behavioral analysis and pattern recognition
-5. Attack chain reconstruction
-6. Asset and user attribution
-7. Impact assessment and response recommendations
+---
+
+## Investigation Methodology
+
+Each case follows a structured SOC workflow:
+
+1. Alert or anomaly detection
+2. Data collection and log analysis
+3. Field extraction and parsing
+4. Indicator pivoting (IP, ports, domains)
+5. Behavioral analysis
+6. Attack pattern identification
+7. Evidence correlation
+8. Reporting and recommendations
 
 ---
 
@@ -47,54 +69,53 @@ Each case follows a consistent SOC investigation methodology:
 
 ```
 soc-traffic-analysis/
-├── case-1-netsupport-rat/
-├── case-2-trickbot/
-├── case-3-lumma-fingerprinting/
-│   ├── screenshots/
-│   └── report.md
+├── splunk/
+│   └── case-1-port-scan-detection/
+│       ├── screenshots/
+│       └── report.md
+│
+├── wireshark/
+│   ├── case-1-netsupport-rat/
+│   ├── case-2-trickbot/
+│   └── case-3-lumma-fingerprinting/
 ```
 
-Each case contains:
+---
 
-* A detailed incident report
-* Supporting packet-level evidence (screenshots)
-* Documented analysis aligned with SOC workflows
+## Tools & Technologies
+
+* Splunk (SIEM)
+* Wireshark (Packet Analysis)
+* Windows Firewall Logs
+* Sysmon (Endpoint Telemetry)
+* Kali Linux (Attack Simulation)
+* Threat Intelligence (VirusTotal)
 
 ---
 
-## Tools & Techniques
+## Key Insights
 
-* Wireshark for packet-level analysis
-* Threat intelligence validation (VirusTotal)
-* Protocol analysis (DNS, HTTP, TLS, TCP)
-* Behavioral detection and traffic pattern analysis
-
----
-
-## Key Observations
-
-* Malware frequently leverages legitimate protocols (HTTP/TLS) to evade detection
-* Behavioral analysis is more reliable than static indicators alone
-* Accurate timeline reconstruction is critical for understanding attack progression
-* Effective filtering is essential to separate benign traffic from malicious activity
+* Behavioral detection is more reliable than signature-based detection
+* Reconnaissance activity (port scanning) is an early indicator of attacks
+* Log correlation across sources significantly improves detection accuracy
+* Proper field extraction is critical for effective SIEM analysis
 
 ---
 
-## Professional Context
+## Professional Value
 
-This work demonstrates practical SOC analyst capabilities, including:
+This lab demonstrates:
 
-* Structured investigation methodology
-* Evidence-based reasoning and validation
-* Clear and concise incident reporting
-* Focus on real-world detection and analysis scenarios
+* Practical SOC analyst skills
+* Real-world detection engineering
+* Log analysis and threat identification
+* Structured incident reporting
+* Hands-on SIEM experience
 
 ---
 
 ## Author
 
-Sai Shashank P
-SOC Analyst 
-Focused on Threat Detection, Incident Response, and Network Traffic Analysis
-
----
+**Sai Shashank P**
+SOC Analyst
+Focused on Threat Detection, Incident Response, and Security Engineering

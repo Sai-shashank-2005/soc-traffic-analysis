@@ -1,6 +1,6 @@
 # Security Incident Report
 
-**Case ID:** SOC-TRAFFIC-003
+**Case ID:** SOC-SIEM-001
 **Incident Type:** Malware Activity (Lumma Stealer – Fingerprinting)
 **Date of Analysis:** 2026-04-10
 **Analyst:** Sai Shashank P

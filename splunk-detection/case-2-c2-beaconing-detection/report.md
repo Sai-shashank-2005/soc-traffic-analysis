@@ -110,7 +110,7 @@ The external IP **98.70.194.75** shows significantly higher connection frequency
 
 ### 4.3 Repeated Communication
 
-![Repeated Connections](screenshots/03_repeated_connections.png)
+![Repeated Connections](screenshots/03_destination_port_analysis.png)
 
 **Observation:**
 The host repeatedly communicates with the same external IP, confirming persistent outbound activity.

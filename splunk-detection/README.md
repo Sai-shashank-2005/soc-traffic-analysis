@@ -1,75 +1,101 @@
 # Splunk SIEM Lab
 
-## Overview
-
-This section of the repository focuses on **SIEM-based threat detection using Splunk**.
-The lab simulates real-world SOC workflows by ingesting endpoint and network logs, developing detection queries, and validating suspicious activity through structured analysis.
+Focused on SOC Analyst and Detection Engineering use cases.
 
 ---
+
+## Key Highlights
+
+* Built a hands-on SOC lab using Splunk to detect real-world attack behaviors
+* Developed detections for:
+
+  * Port Scanning (Reconnaissance)
+  * C2 Beaconing (Command and Control)
+* Performed time-based and statistical analysis (interval and jitter)
+* Parsed raw logs using SPL (rex) without relying on pre-extracted fields
+* Created SOC-style investigation reports with evidence and MITRE ATT&CK mapping
+
+---
+
+## Tools Used
+
+* Splunk Enterprise
+* Sysmon
+* Windows Event Logs
+* Windows Firewall Logs
+* PowerShell (attack simulation)
+
+---
+
+## Detection Cases
+
+* Case 1: Port Scan Detection
+  [View Report](./case-1-port-scan-detection/report.md)
+
+* Case 2: C2 Beaconing Detection
+  [View Report](./case-2-c2-beaconing-detection/report.md)
+
+---
+
+## What This Lab Demonstrates
+
+* Log ingestion and parsing (Windows Firewall, Sysmon)
+* Detection engineering using SPL
+* Behavioral analysis (patterns, frequency, timing)
+* Identification of attacker techniques
+* SOC-style investigation and reporting
+
+---
+
 ## Architecture
 
 ![SOC Lab Architecture Diagram](assests/architecture.png)
-
-
-## Scope
-
-The Splunk lab covers:
-
-* Log ingestion from Windows systems (Sysmon, Event Logs, Firewall)
-* Detection engineering using Splunk Processing Language (SPL)
-* Identification of suspicious behaviors (reconnaissance, execution, authentication events)
-* Correlation of network and endpoint activity
-* Development of SOC-style detection use cases
-
 ---
 
-## Detection Focus
+## Methodology
 
-The cases in this section emphasize high-value detection scenarios:
+Each detection follows a structured SOC workflow:
 
-* Reconnaissance activity (port scanning)
-* Suspicious process execution (PowerShell, command-line abuse)
-* Authentication anomalies (brute force attempts)
-* Network connections and potential C2 behavior
-
----
-
-## Approach
-
-Each case follows a structured detection workflow:
-
-1. Log collection and ingestion
-2. Field extraction and normalization
+1. Log ingestion
+2. Field extraction using rex
 3. Detection query development
 4. Behavioral analysis
 5. Evidence validation
-6. Documentation of findings
+6. SOC report documentation
 
 ---
 
-## Structure
+## Skills Demonstrated
 
-```text id="vxt2hm"
-splunk/
-├── case-1-port-scan-detection/
-├── case-2-...
-```
+* Splunk (SPL, field extraction, statistical analysis)
+* Log Analysis (Firewall and Sysmon)
+* Detection Engineering (behavior-based detection)
+* Threat Hunting (reconnaissance and C2 identification)
+* MITRE ATT&CK Mapping
+* SOC Investigation and Reporting
 
-Each case includes:
+---
 
-* Detection queries (SPL)
-* Supporting evidence (screenshots)
-* SOC-style incident report
+## Detection Outcomes
+
+* Identified port scanning activity targeting multiple service ports
+* Detected command-and-control beaconing using time-based analysis
+* Validated automated behavior using interval and jitter calculations
+* Demonstrated ability to distinguish normal vs malicious traffic patterns
 
 ---
 
 ## Objective
 
-The goal of this lab is to demonstrate practical experience in:
+Demonstrate practical SOC capabilities by:
 
-* SIEM operations and log analysis
-* Detection engineering
-* Threat identification and validation
-* Professional SOC reporting
+* Detecting attacker behavior from raw logs
+* Building reliable detection logic
+* Validating threats using analysis
+* Presenting findings in professional SOC reports
 
 ---
+
+## Summary
+
+This lab demonstrates the ability to move from raw logs to detection, investigation, and validated threat identification, reflecting real SOC analyst workflows.

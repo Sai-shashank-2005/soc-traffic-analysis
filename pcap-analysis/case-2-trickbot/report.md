@@ -72,9 +72,7 @@ http.request
 GET /ser0410.bin
 ```
 
-[View Screenshot](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-2-trickbot/screenshots/payload-download.png)
-
-![Payload Download](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-2-trickbot/screenshots/payload-download.png)
+![Payload Download](screenshots/payload-download.png)
 
 * Source: 10.10.10.209
 * Destination: 95.110.193.132
@@ -92,9 +90,8 @@ GET /ser0410.bin
 ser0410.bin (~364 KB)
 ```
 
-[View Screenshot](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-2-trickbot/screenshots/http-object.png)
+![HTTP Object](screenshots/http-object.png)
 
-![HTTP Object](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-2-trickbot/screenshots/http-object.png)
 
 👉 Confirms **binary payload transfer**
 
@@ -105,9 +102,7 @@ ser0410.bin (~364 KB)
 * File analyzed in VirusTotal
 * Detected as **TrickBot malware**
 
-[View Screenshot](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-2-trickbot/screenshots/virustotal.png)
-
-![VirusTotal](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-2-trickbot/screenshots/virustotal.png)
+![VirusTotal](screenshots/virustotal.png)
 
 👉 Confirms **malicious nature of payload**
 
@@ -127,9 +122,7 @@ dns
 caveaudelteatro.it → 95.110.193.132
 ```
 
-[View Screenshot](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-2-trickbot/screenshots/dns-resolution.png)
-
-![DNS Resolution](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-2-trickbot/screenshots/dns-resolution.png)
+![DNS Resolution](screenshots/dns-resolution.png)
 
 👉 Links **domain to delivery infrastructure**
 
@@ -149,9 +142,7 @@ ip.addr == 82.214.141.134
 10.10.10.209 → 82.214.141.134:449
 ```
 
-[View Screenshot](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-2-trickbot/screenshots/c2-traffic.png)
-
-![C2 Traffic](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-2-trickbot/screenshots/c2-traffic.png)
+![C2 Traffic](screenshots/c2-traffic.png)
 
 * TLS handshake + encrypted data observed after the incident 
 * Repeated connections over time
@@ -168,9 +159,7 @@ Filter used:
 nbns
 ```
 
-[View Screenshot](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-2-trickbot/screenshots/hostname.png)
-
-![Hostname](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-2-trickbot/screenshots/hostname.png)
+![Hostname](screenshots/hostname.png)
 
 * Hostname identified as:
 

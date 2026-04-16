@@ -62,8 +62,7 @@ No confirmed data exfiltration or persistent command-and-control communication w
 
 The host generated normal traffic prior to the incident, including Microsoft connectivity checks and requests to Google services.
 
-![Baseline](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-3-lumma-fingerprinting/screenshots/01-baseline-connectivity.png)
-
+![Baseline](screenshots/01-baseline-connectivity.png)
 ---
 
 ### 6.2 Malicious Domain Contact
@@ -74,16 +73,14 @@ The host initiated an HTTP request to the malicious domain:
 whitepepper.su/api/set_agent
 ```
 
-![Malicious Request](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-3-lumma-fingerprinting/screenshots/02-malicious-domain-request.png)
-
+![Malicious Request](screenshots/02-malicious-domain-request.png)
 ---
 
 ### 6.3 Fingerprinting Payload
 
 The HTTP response contained a JavaScript payload designed to collect system, browser, and hardware information.
 
-![Fingerprint Script](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-3-lumma-fingerprinting/screenshots/03-fingerprinting-script.png)
-
+![Fingerprint Script](screenshots/03-fingerprinting-script.png)
 ---
 
 ### 6.4 Fingerprinting Behavior
@@ -92,8 +89,7 @@ Repeated requests to the endpoint `/api/set_agent` were observed, indicating act
 
 Although the script includes functionality for data exfiltration via HTTP POST, no such requests were observed in the PCAP.
 
-![Fingerprint Behavior](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-3-lumma-fingerprinting/screenshots/04-fingerprinting-behavior.png)
-
+![Fingerprint Behavior](screenshots/04-fingerprinting-behavior.png)
 ---
 
 ### 6.5 Connection Termination
@@ -104,8 +100,7 @@ The session was terminated by the client, with no further communication observed
 10.1.28.58 → 153.92.1.49 [RST, ACK]
 ```
 
-![Termination](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-3-lumma-fingerprinting/screenshots/05-connection-termination.png)
-
+![Termination](screenshots/05-connection-termination.png)
 ---
 
 ### 6.6 Host and User Identification
@@ -116,8 +111,7 @@ Hostname identified via NBNS:
 DESKTOP-ES9F3ML
 ```
 
-![Hostname](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-3-lumma-fingerprinting/screenshots/06-hostname-nbns.png)
-
+![Hostname](screenshots/06-hostname-nbns.png)
 ---
 
 Username identified via Kerberos:
@@ -126,8 +120,7 @@ Username identified via Kerberos:
 gwyatt
 ```
 
-![Username](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-3-lumma-fingerprinting/screenshots/07-username-kerberos.png)
-
+![Username](screenshots/07-username-kerberos.png)
 ---
 
 Full name identified via DCERPC:
@@ -136,8 +129,7 @@ Full name identified via DCERPC:
 Gabriel Wyatt
 ```
 
-![Full Name](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-3-lumma-fingerprinting/screenshots/08-fullname-dcerpc.png)
-
+![Full Name](screenshots/08-fullname-dcerpc.png)
 ---
 
 MAC address identified from Ethernet frame:
@@ -145,9 +137,7 @@ MAC address identified from Ethernet frame:
 ```
 00:21:5d:c8:0e:f2
 ```
-
-![MAC](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-3-lumma-fingerprinting/screenshots/09-mac-address.png)
-
+![MAC](screenshots/09-mac-address.png)
 ---
 
 ## 7. Findings

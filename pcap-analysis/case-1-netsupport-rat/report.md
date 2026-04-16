@@ -64,9 +64,7 @@ Filter used:
 ip.addr == 45.131.214.85
 ```
 
-[View Full Image](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-1-netsupport-rat/screenshots/ioc-pivot.png)
-
-![IoC Pivot](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-1-netsupport-rat/screenshots/ioc-pivot.png)
+![IoC Pivot](screenshots/ioc-pivot.png)
 
 * Identified internal host communicating with malicious IP
 * Confirmed infected system: **10.2.28.88**
@@ -88,9 +86,7 @@ ip.src == 10.2.28.88 and ip.dst == 45.131.214.85
 
 ### 6.3 Network Behavior Analysis (C2 Activity)
 
-[View Full Image](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-1-netsupport-rat/screenshots/c2-traffic.png)
-
-![C2 Traffic](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-1-netsupport-rat/screenshots/c2-traffic.png)
+![C2 Traffic](screenshots/c2-traffic.png)
 
 * Repeated outbound connections observed:
 
@@ -110,9 +106,7 @@ Filter used:
 nbns
 ```
 
-[View Full Image](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-1-netsupport-rat/screenshots/hostname-nbns.png)
-
-![Hostname Identification](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-1-netsupport-rat/screenshots/hostname-nbns.png)
+![Hostname Identification](screenshots/hostname-nbns.png)
 
 * Hostname extracted from NBNS registration traffic
 
@@ -126,9 +120,7 @@ Filter used:
 kerberos.CNameString
 ```
 
-[View Full Image](https://github.com/Sai-shashank-2005/soc-traffic-analysis/blob/main/case-1-netsupport-rat/screenshots/username-kerberos.png)
-
-![Username Extraction](https://raw.githubusercontent.com/Sai-shashank-2005/soc-traffic-analysis/main/case-1-netsupport-rat/screenshots/username-kerberos.png)
+![Username Extraction](screenshots/username-kerberos.png)
 
 * Username identified from Kerberos authentication traffic
 

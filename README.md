@@ -1,121 +1,71 @@
-# SOC Traffic Analysis Lab
+# 🛡️ SOC Traffic Analysis & Threat Detection Portfolio
 
 ## Overview
 
-This repository documents hands-on Security Operations Center (SOC) investigations performed using both **SIEM (Splunk)** and **network traffic analysis (Wireshark)**.
+This repository documents hands-on Security Operations Center (SOC) investigations and detection engineering workflows. Utilizing **SIEM (Splunk)** and **Network Traffic Analysis (Wireshark)**, this lab environment simulates real-world incident response scenarios. 
 
-The lab simulates real-world detection and incident response workflows, focusing on identifying malicious activity, validating threats, and producing professional, evidence-based security reports.
-
----
-
-## Core Focus Areas
-
-* SIEM-based threat detection (Splunk)
-* Network traffic analysis (PCAP investigations)
-* Attack simulation and detection engineering
-* Log analysis (Windows, Sysmon, Firewall)
-* Incident response and reporting
+The focus is on moving from raw telemetry to actionable intelligence—identifying malicious activity, validating threats through behavioral analysis, mapping to MITRE ATT&CK frameworks, and producing professional security incident reports.
 
 ---
 
-## Key Capabilities
+## 🎯 Core Competencies Demonstrated
 
-* Detection of reconnaissance activities (port scanning, enumeration)
-* Identification of malware behavior through network traffic
-* Correlation of logs across multiple data sources
-* Reconstruction of attack chains from initial access to impact
-* Differentiation between benign and malicious activity
-* Development of structured SOC incident reports
-
----
-
-## Case Categories
-
-### 🔹 SIEM Detection (Splunk)
-
-| Case   | Title                              | Description                                                          |
-| ------ | ---------------------------------- | -------------------------------------------------------------------- |
-| Case 1 | Port Scan Detection                | Detected reconnaissance activity using firewall logs and SPL queries |
-| Case 2 | Brute Force Detection *(Upcoming)* | Detect authentication attacks using Windows/Sysmon logs              |
+* **SIEM & Detection Engineering:** Log ingestion, raw data parsing using SPL (`rex`), and building behavior-based detection rules in Splunk.
+* **Network Traffic Analysis:** Deep packet inspection (PCAP) to reconstruct attack chains, extract indicators of compromise (IoCs), and analyze malware behavior.
+* **Log Analysis:** Correlating telemetry across Windows Event Logs, Sysmon, and Windows Firewall.
+* **Threat Identification:** Distinguishing between benign and malicious traffic, including C2 beaconing, port scanning, and drive-by downloads.
+* **Incident Reporting:** Developing structured, evidence-based SOC reports with detailed mitigation recommendations.
 
 ---
 
-### 🔹 Network Traffic Analysis (Wireshark)
+## 📂 Repository Structure & Case Studies
 
-| Case   | Malware        | Key Outcome                                              |
-| ------ | -------------- | -------------------------------------------------------- |
-| Case 3 | NetSupport RAT | Identified remote access activity and beaconing behavior |
-| Case 4 | TrickBot       | Reconstructed infection chain and C2 communication       |
-| Case 5 | Lumma Stealer  | Detected victim fingerprinting and attribution           |
+This portfolio is divided into two primary disciplines: SIEM-based detection and packet-level forensic analysis.
 
----
+### 🔹 Splunk SIEM Detection
 
-## Investigation Methodology
+Focused on detecting anomalous behavior and attacker techniques using statistical and time-based analysis in Splunk.
 
-Each case follows a structured SOC workflow:
+| Case ID | Title | Description | MITRE Tactic |
+| :--- | :--- | :--- | :--- |
+| **Case 1** | [Port Scan Detection](./splunk-detection/case-1-port-scan-detection/report.md) | Detected and mapped automated reconnaissance activity targeting multiple Windows service ports (RPC, NetBIOS, SMB) via firewall log telemetry. | Discovery (T1046) |
+| **Case 2** | [C2 Beaconing Detection](./splunk-detection/case-2-c2-beaconing-detection/report.md) | Identified command-and-control behavior by analyzing connection frequency, interval (~5s), and jitter from outbound firewall telemetry. | Command & Control (T1071.001) |
 
-1. Alert or anomaly detection
-2. Data collection and log analysis
-3. Field extraction and parsing
-4. Indicator pivoting (IP, ports, domains)
-5. Behavioral analysis
-6. Attack pattern identification
-7. Evidence correlation
-8. Reporting and recommendations
+### 🔹 PCAP Network Analysis (Wireshark)
 
----
+Focused on inspecting raw network traffic to extract malware payloads, identify C2 infrastructure, and perform user attribution.
 
-## Repository Structure
-
-```
-soc-traffic-analysis/
-├── splunk/
-│   └── case-1-port-scan-detection/
-│       ├── screenshots/
-│       └── report.md
-│
-├── wireshark/
-│   ├── case-1-netsupport-rat/
-│   ├── case-2-trickbot/
-│   └── case-3-lumma-fingerprinting/
-```
+| Case ID | Malware Family | Key Outcomes & Observations |
+| :--- | :--- | :--- |
+| **Case 1** | [NetSupport RAT](./pcap-analysis/case-1-netsupport-rat/report.md) | Identified encrypted command-and-control beaconing over TCP 443; performed user and host attribution via NBNS and Kerberos traffic. |
+| **Case 2** | [TrickBot](./pcap-analysis/case-2-trickbot/report.md) | Reconstructed a drive-by download infection chain; extracted malicious binary objects from HTTP traffic; identified transition to encrypted TLS C2 channels. |
+| **Case 3** | [Lumma Stealer](./pcap-analysis/case-3-lumma-fingerprinting/report.md) | Detected endpoint fingerprinting activity via malicious JavaScript payloads designed to collect system, browser, and hardware telemetry. |
 
 ---
 
-## Tools & Technologies
+## 🔬 Investigation Methodology
 
-* Splunk (SIEM)
-* Wireshark (Packet Analysis)
-* Windows Firewall Logs
-* Sysmon (Endpoint Telemetry)
-* Kali Linux (Attack Simulation)
-* Threat Intelligence (VirusTotal)
+Each case in this repository strictly adheres to a standard SOC workflow to ensure accurate, repeatable, and thorough investigations:
 
----
-
-## Key Insights
-
-* Behavioral detection is more reliable than signature-based detection
-* Reconnaissance activity (port scanning) is an early indicator of attacks
-* Log correlation across sources significantly improves detection accuracy
-* Proper field extraction is critical for effective SIEM analysis
+1.  **Telemetry Collection:** Ingesting raw logs (Sysmon, Firewall) or capturing PCAP data.
+2.  **Parsing & Extraction:** Utilizing tools like Splunk SPL (`rex`) or Wireshark HTTP object extraction to isolate relevant data fields.
+3.  **Indicator Pivoting:** Expanding the search scope using identified IPs, ports, and domains.
+4.  **Behavioral Analysis:** Evaluating frequency, timing, and volume to identify automated or malicious patterns.
+5.  **Attribution:** Linking malicious activity to specific internal hosts and user accounts.
+6.  **Reporting:** Documenting evidence, assessing risk severity, and providing actionable remediation steps.
 
 ---
 
-## Professional Value
+## 🛠️ Tools & Technologies
 
-This lab demonstrates:
-
-* Practical SOC analyst skills
-* Real-world detection engineering
-* Log analysis and threat identification
-* Structured incident reporting
-* Hands-on SIEM experience
+* **Analysis:** Splunk Enterprise, Wireshark, VirusTotal
+* **Telemetry:** Windows Firewall Logs, Sysmon, Windows Event Logs
+* **Offensive Simulation:** Kali Linux, PowerShell
 
 ---
 
-## Author
+## 👤 Author
 
 **Sai Shashank P**
-SOC Analyst
-Focused on Threat Detection, Incident Response, and Security Engineering
+*SOC Analyst*
+Dedicated to Threat Detection, Incident Response, and Security Engineering.

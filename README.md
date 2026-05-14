@@ -1,10 +1,14 @@
-# SOC Traffic Analysis & Threat Detection Portfolio
+# 🛡️ SOC Traffic Analysis & Threat Detection Portfolio
 
-## Overview
+[![Role](https://img.shields.io/badge/Role-SOC%20Analyst-blue.svg)]()
+[![SIEM](https://img.shields.io/badge/SIEM-Splunk-black?logo=splunk)]()
+[![Network Analysis](https://img.shields.io/badge/PCAP-Wireshark-1679A7?logo=wireshark&logoColor=white)]()
+[![Framework](https://img.shields.io/badge/Framework-MITRE%20ATT%26CK-red.svg)]()
 
-This repository documents hands-on Security Operations Center (SOC) investigations and detection engineering workflows. Utilizing **SIEM (Splunk)** and **Network Traffic Analysis (Wireshark)**, this lab environment simulates real-world incident response scenarios. 
-
-The focus is on moving from raw telemetry to actionable intelligence—identifying malicious activity, validating threats through behavioral analysis, mapping to MITRE ATT&CK frameworks, and producing professional security incident reports.
+> **Overview**
+> This repository documents hands-on Security Operations Center (SOC) investigations and detection engineering workflows. Utilizing **SIEM (Splunk)** and **Network Traffic Analysis (Wireshark)**, this lab environment simulates real-world incident response scenarios. 
+> 
+> The focus is on moving from raw telemetry to actionable intelligence—identifying malicious activity, validating threats through behavioral analysis, mapping to MITRE ATT&CK frameworks, and producing professional security incident reports.
 
 ---
 
@@ -20,11 +24,10 @@ The focus is on moving from raw telemetry to actionable intelligence—identifyi
 
 ## 📂 Repository Structure & Case Studies
 
-This portfolio is divided into two primary disciplines: SIEM-based detection and packet-level forensic analysis.
+This portfolio is divided into two primary disciplines: **SIEM-based detection** and **packet-level forensic analysis**.
 
 ### 🔹 Splunk SIEM Detection
-
-Focused on detecting anomalous behavior and attacker techniques using statistical and time-based analysis in Splunk.
+*Focused on detecting anomalous behavior and attacker techniques using statistical and time-based analysis in Splunk.*
 
 | Case ID | Title | Description | MITRE Tactic |
 | :--- | :--- | :--- | :--- |
@@ -32,8 +35,7 @@ Focused on detecting anomalous behavior and attacker techniques using statistica
 | **Case 2** | [C2 Beaconing Detection](./splunk-detection/case-2-c2-beaconing-detection/report.md) | Identified command-and-control behavior by analyzing connection frequency, interval (~5s), and jitter from outbound firewall telemetry. | Command & Control (T1071.001) |
 
 ### 🔹 PCAP Network Analysis (Wireshark)
-
-Focused on inspecting raw network traffic to extract malware payloads, identify C2 infrastructure, and perform user attribution.
+*Focused on inspecting raw network traffic to extract malware payloads, identify C2 infrastructure, and perform user attribution.*
 
 | Case ID | Malware Family | Key Outcomes & Observations |
 | :--- | :--- | :--- |
@@ -47,20 +49,22 @@ Focused on inspecting raw network traffic to extract malware payloads, identify 
 
 Each case in this repository strictly adheres to a standard SOC workflow to ensure accurate, repeatable, and thorough investigations:
 
-1.  **Telemetry Collection:** Ingesting raw logs (Sysmon, Firewall) or capturing PCAP data.
-2.  **Parsing & Extraction:** Utilizing tools like Splunk SPL (`rex`) or Wireshark HTTP object extraction to isolate relevant data fields.
-3.  **Indicator Pivoting:** Expanding the search scope using identified IPs, ports, and domains.
-4.  **Behavioral Analysis:** Evaluating frequency, timing, and volume to identify automated or malicious patterns.
-5.  **Attribution:** Linking malicious activity to specific internal hosts and user accounts.
-6.  **Reporting:** Documenting evidence, assessing risk severity, and providing actionable remediation steps.
+1. **Telemetry Collection:** Ingesting raw logs (Sysmon, Firewall) or capturing PCAP data.
+2. **Parsing & Extraction:** Utilizing tools like Splunk SPL (`rex`) or Wireshark HTTP object extraction to isolate relevant data fields.
+3. **Indicator Pivoting:** Expanding the search scope using identified IPs, ports, and domains.
+4. **Behavioral Analysis:** Evaluating frequency, timing, and volume to identify automated or malicious patterns.
+5. **Attribution:** Linking malicious activity to specific internal hosts and user accounts.
+6. **Reporting:** Documenting evidence, assessing risk severity, and providing actionable remediation steps.
 
 ---
 
 ## 🛠️ Tools & Technologies
 
-* **Analysis:** Splunk Enterprise, Wireshark, VirusTotal
-* **Telemetry:** Windows Firewall Logs, Sysmon, Windows Event Logs
-* **Offensive Simulation:** Kali Linux, PowerShell
+| Category | Technologies Used |
+| :--- | :--- |
+| **Analysis** | `Splunk Enterprise`, `Wireshark`, `VirusTotal` |
+| **Telemetry** | `Windows Firewall Logs`, `Sysmon`, `Windows Event Logs` |
+| **Simulation** | `Kali Linux`, `PowerShell` |
 
 ---
 

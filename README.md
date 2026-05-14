@@ -1,4 +1,4 @@
-# 🛡️ SOC Traffic Analysis & Threat Detection Portfolio
+# SOC Traffic Analysis & Threat Detection Portfolio
 
 ## Overview
 
